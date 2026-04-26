@@ -10,14 +10,13 @@ const express = require("express");
 const app = express();
 app.use(express.json());
 
-// BUG: Missing CORS headers on all routes.
-// Cross-origin requests from the frontend (different origin in dev) will fail.
-// A correct implementation would include:
-//   app.use((req, res, next) => {
-//     res.header("Access-Control-Allow-Origin", "*");
-//     res.header("Access-Control-Allow-Headers", "Content-Type");
-//     next();
-//   });
+app.use((req, res, next) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Content-Type");
+  res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS");
+  if (req.method === "OPTIONS") return res.sendStatus(204);
+  next();
+});
 
 // GET /api/products
 // Returns all products. Works correctly.
