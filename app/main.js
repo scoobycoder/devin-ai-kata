@@ -18,13 +18,15 @@ const PRODUCTS = [
 
 const CATEGORIES = ["all", "knitwear", "trousers", "outerwear", "tops"];
 
-// --- BUG 1: fetchCartCount calls a non-existent API endpoint ---
-// This produces a console error on every page load but the UI never
-// shows a visible error, so it goes unnoticed in manual testing.
 async function fetchCartCount() {
-  const response = await fetch("/api/cart/count"); // endpoint does not exist in mock server
-  const data = await response.json();
-  return data.count;
+  try {
+    const response = await fetch("/api/cart/count");
+    if (!response.ok) return 0;
+    const data = await response.json();
+    return data.count ?? 0;
+  } catch {
+    return 0;
+  }
 }
 
 // --- BUG 2: newsletter submit silently fails ---
@@ -109,12 +111,8 @@ function App() {
   const [cartLoading, setCartLoading] = useState(false);
   const toastTimer = useRef(null);
 
-  // BUG 1 fires here — unhandled promise rejection on mount
   useEffect(() => {
-    fetchCartCount().then(count => setCartCount(count)).catch(() => {
-      // Intentionally swallowed — the error appears in console but UI shows nothing
-      console.error("Failed to load cart count from /api/cart/count");
-    });
+    fetchCartCount().then(count => setCartCount(count));
   }, []);
 
   function showToast(message) {
