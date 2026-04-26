@@ -170,15 +170,16 @@ function App() {
     );
   }
 
-  // BUG 7: Cart button in header has an onClick that references an undefined function
-  // Clicking it throws "viewCart is not defined" — a ReferenceError in console.
-  // The button is visible and styled correctly so this is easy to miss visually.
+  function handleViewCart() {
+    showToast(`You have ${cartCount} item${cartCount !== 1 ? "s" : ""} in your cart`);
+  }
+
   return (
     <div>
       <header className="header">
         <div className="logo">Thread<span>line</span></div>
         <div className="header-actions">
-          <button className="cart-btn" onClick={() => viewCart()}>
+          <button className="cart-btn" onClick={handleViewCart}>
             Cart ({cartCount})
           </button>
         </div>
