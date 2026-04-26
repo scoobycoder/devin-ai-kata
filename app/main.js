@@ -123,13 +123,9 @@ function App() {
     toastTimer.current = setTimeout(() => setToast({ show: false, message: "" }), 2500);
   }
 
-  // BUG 4: category filter is broken — comparison uses wrong field
-  // "tops" filter returns nothing because it compares category to product.name
-  // instead of product.category. Hard to notice since other filters work fine.
   const filtered = products
     .filter(p => {
       if (category === "all") return true;
-      if (category === "tops") return p.name.toLowerCase().includes(category); // BUG: should be p.category === category
       return p.category === category;
     })
     .filter(p =>
