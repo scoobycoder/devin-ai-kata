@@ -156,14 +156,14 @@ function App() {
     );
   }
 
-  // BUG 6: Sort button has no accessible label and is missing type="button"
-  // In some browsers this causes the page to reload (treated as form submit)
-  // when the sort button is inside a form context. Also missing aria-pressed.
   function SortButton() {
     return (
-      <button // Missing: type="button", aria-pressed, aria-label
+      <button
+        type="button"
         className={`sort-btn ${sortAsc ? "active" : ""}`}
         onClick={() => setSortAsc(s => !s)}
+        aria-label={sortAsc ? "Sort by price descending" : "Sort by price ascending"}
+        aria-pressed={sortAsc}
       >
         Price {sortAsc ? "↑" : "↓"}
       </button>
