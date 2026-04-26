@@ -138,15 +138,12 @@ function App() {
     )
     .sort((a, b) => sortAsc ? a.price - b.price : b.price - a.price);
 
-  // BUG 5: addToCart does not update cart count in UI
-  // It shows a toast but the cart count in the header never increments.
-  // setCartCount is never called here.
   function handleAddToCart(product) {
     setCartLoading(true);
     setTimeout(() => {
       setCartLoading(false);
+      setCartCount(c => c + 1);
       showToast(`${product.name} added to cart`);
-      // Missing: setCartCount(c => c + 1)
     }, 400);
   }
 
