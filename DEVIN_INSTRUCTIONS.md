@@ -40,7 +40,7 @@ Work through these steps in order. Read the skill file at `skills/error-scanner.
   - Console.error or console.warn calls that indicate known problems
 
 ### Step 4 — Open PRs
-For each distinct bug you find, open a **separate pull request** on `{YOUR_REPO_URL}` with:
+For each distinct bug you find, open a **separate pull request** on `https://github.com/scoobycoder/devin-ai-kata` with:
 - **Title:** `[Devin] fix: <short description of bug>`
 - **Body must include:**
   - What the bug is (1–2 sentences, plain English)
