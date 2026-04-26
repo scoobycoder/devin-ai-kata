@@ -66,8 +66,7 @@ function ProductCard({ product, onAddToCart, onWishlist, wishlist }) {
   return (
     <div className="product-card">
       <div className="product-image-wrap">
-        {/* BUG 3: img is missing alt attribute — accessibility violation, console warning */}
-        <img src={product.image} />
+        <img src={product.image} alt={product.name} />
         {product.badge && <span className="product-badge">{product.badge}</span>}
         <button
           className="wishlist-btn"
