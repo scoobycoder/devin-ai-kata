@@ -49,8 +49,8 @@ app.get("/api/products/:id", (req, res) => {
 app.post("/api/cart", (req, res) => {
   const { productId, quantity } = req.body;
   if (!productId) return res.status(400).json({ error: "productId is required" });
-  // Missing validation: quantity <= 0 causes divide-by-zero in unit price calc
-  const unitPrice = 100 / quantity; // BUG: throws if quantity is 0
+  if (!quantity || quantity <= 0) return res.status(400).json({ error: "quantity must be a positive number" });
+  const unitPrice = 100 / quantity;
   res.json({ success: true, productId, quantity, unitPrice });
 });
 
