@@ -10,8 +10,8 @@
 
 You are doing an overnight quality scan of a small e-commerce web application. Your job is to find bugs, broken flows, and errors — then open pull requests with fixes on the GitHub repository.
 
-**App URL:** `{YOUR_APP_URL}`  
-**GitHub repo:** `{YOUR_REPO_URL}`  
+**App URL:** `https://devin-ai-kata.vercel.app`
+**GitHub repo:** `https://github.com/scoobycoder/devin-ai-kata`
 **Branch to work from:** `devin/bug-scan` (create it from `main`)
 
 ---
