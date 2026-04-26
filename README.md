@@ -10,7 +10,7 @@
 
 This kata teaches you the **reconnaissance handoff pattern** — using an async agent (Devin) to do overnight log scanning and error detection, then feeding its output into a structured Claude Code pipeline the next morning.
 
-This is the exact pattern Hemanth described in Scott's demo: *"Kick it off at night, look at all your errors, and in the morning, have a PR ready for you."*
+This is the exact pattern described in the AI Club demo: *"Kick it off at night, look at all your errors, and in the morning, have a PR ready for you."*
 
 By the end of this kata you will:
 - Understand where Devin fits relative to Claude Code (before the pipeline, not inside it)
@@ -103,9 +103,9 @@ The interesting question is: **which ones does Devin catch, and which does it mi
 
 After the morning review, the group will map Devin's findings to the two pipelines you already use:
 
-**→ Scott's pipeline:** Devin's research brief becomes the input to the researcher agent. Instead of starting from a Jira ticket, you start from a Devin-generated bug report. The planner phases the fix. The engineer implements it in atomic commits.
+**→ Research pipeline:** Devin's research brief becomes the input to the researcher agent. Instead of starting from a Jira ticket, you start from a Devin-generated bug report. The planner phases the fix. The engineer implements it in atomic commits.
 
-**→ Shalini's pipeline:** Devin's overnight scan plays the role of the testing flow's "tests fail first" step — it surfaces what's broken before any engineering work begins, giving the intake flow a concrete starting point.
+**→ Testing pipeline:** Devin's overnight scan plays the role of the testing flow's "tests fail first" step — it surfaces what's broken before any engineering work begins, giving the intake flow a concrete starting point.
 
 ---
 

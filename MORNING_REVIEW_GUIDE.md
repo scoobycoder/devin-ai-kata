@@ -67,14 +67,14 @@ Work through each known bug:
 
 This is the conceptual payoff. Discuss as a group:
 
-**Question 1 — Scott's pipeline handoff:**  
-Pick one of Devin's correct PRs. Imagine instead of merging it directly, you fed Devin's bug report into Scott's researcher agent as the starting context.  
+**Question 1 — Research pipeline handoff:**
+Pick one of Devin's correct PRs. Imagine instead of merging it directly, you fed Devin's bug report into the researcher agent as the starting context.
 - What would the researcher add that Devin's report is missing?  
 - What would the planner phase differently than Devin's single-commit fix?  
 - Is there value in running it through the full pipeline, or is Devin's direct fix good enough for this class of bug?
 
-**Question 2 — Shalini's pipeline handoff:**  
-Devin found bugs by interacting with the running app. Shalini's testing flow writes BDD tests that fail first.  
+**Question 2 — Testing pipeline handoff:**
+Devin found bugs by interacting with the running app. The testing flow writes BDD tests that fail first.
 - Could you turn any of Devin's findings into a failing user journey test before applying the fix?  
 - What would that test look like?  
 - Does Devin's scan replace the testing flow, complement it, or expose a gap it can't fill?
