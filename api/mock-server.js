@@ -54,14 +54,17 @@ app.post("/api/cart", (req, res) => {
   res.json({ success: true, productId, quantity, unitPrice });
 });
 
-// GET /api/newsletter/subscribe
-// BUG: This endpoint is GET but the frontend should POST subscriber email.
-// Using GET for a mutation violates REST semantics and means email could
-// appear in server logs and browser history.
-app.get("/api/newsletter/subscribe", (req, res) => {
-  const { email } = req.query; // BUG: email in query param, not request body
+// POST /api/newsletter/subscribe
+app.post("/api/newsletter/subscribe", (req, res) => {
+  const { email } = req.body;
   if (!email) return res.status(400).json({ error: "email required" });
-  console.log(`Subscribed: ${email}`); // BUG: PII in server logs
+  res.json({ success: true });
+});
+
+// Keep GET for backward compatibility but prefer POST
+app.get("/api/newsletter/subscribe", (req, res) => {
+  const { email } = req.query;
+  if (!email) return res.status(400).json({ error: "email required" });
   res.json({ success: true });
 });
 
