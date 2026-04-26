@@ -27,16 +27,25 @@ async function fetchCartCount() {
   return data.count;
 }
 
-// --- BUG 2: newsletter submit silently fails ---
-// The form handler prevents default but never actually submits or
-// gives user feedback. No error thrown, no success state shown.
 function NewsletterSection() {
   const [email, setEmail] = useState("");
+  const [status, setStatus] = useState("idle");
 
-  function handleSubmit(e) {
+  async function handleSubmit(e) {
     e.preventDefault();
-    // Missing: API call, success state, error handling, or any feedback to user
-    setEmail("");
+    if (!email) return;
+    setStatus("submitting");
+    try {
+      const response = await fetch(`/api/newsletter/subscribe?email=${encodeURIComponent(email)}`);
+      if (response.ok) {
+        setStatus("success");
+        setEmail("");
+      } else {
+        setStatus("error");
+      }
+    } catch {
+      setStatus("error");
+    }
   }
 
   return (
@@ -51,11 +60,14 @@ function NewsletterSection() {
           type="email"
           placeholder="your@email.com"
           value={email}
-          onChange={e => setEmail(e.target.value)}
+          onChange={e => { setEmail(e.target.value); if (status !== "idle") setStatus("idle"); }}
           required
         />
-        <button type="submit" className="newsletter-submit">Subscribe</button>
+        <button type="submit" className="newsletter-submit" disabled={status === "submitting"}>
+          {status === "submitting" ? "Subscribing…" : status === "success" ? "Subscribed!" : "Subscribe"}
+        </button>
       </form>
+      {status === "error" && <p style={{color: "#fca5a5", marginTop: 8, fontSize: 13}}>Something went wrong. Please try again.</p>}
     </div>
   );
 }
